@@ -1,7 +1,7 @@
 Intro to Shaders in Unity
 =========================
 
-1. What's a shader?
+1) What's a shader?
 -------------------
 
 Shader = code that runs on the GPU
@@ -16,14 +16,14 @@ Your shader script(s) will execute for every one of the parallel pipes: http://i
 
 The parallel, per-pixel nature is a different way of thinking about your code -- this is why it's infamously difficult to understand. Another hard part is debugging shader code (thankfully Unity makes this easier)
 
-2. Shaders in Unity
+2) Shaders in Unity
 -------------------
 
 All of the materials on objects in a unity scene are being rendered with shaders. Unity doesn't let you edit these default ones directly, so when you want more customization you can make your own Shader.
 
 https://docs.unity3d.com/Manual/ShadersOverview.html
 
-3. Setting up an environment
+3) Setting up an environment
 ----------------------------
 
  - Add 3d game obj to scene
@@ -33,7 +33,7 @@ https://docs.unity3d.com/Manual/ShadersOverview.html
  - Add material to game obj
  - Start editing your shader script
 
-4. Fragment shader basics
+4) Fragment shader basics
 -------------------------
 
 -0.5 to 0.5
@@ -42,21 +42,27 @@ Datatypes
 
 Ins & outs
 
-5. Visual debugging in the fragment shader
+5) Visual debugging in the fragment shader
 ------------------------------------------
 
-6. Change object color
+6) Change object color
 ----------------------
 
-7. Transparency
+7) Transparency
 ---------------
+ 
+https://docs.unity3d.com/Manual/SL-Blend.html
 
-8. Grab pass
+`Tags { "Queue" = "Transparent" }`
+
+`discard;`
+
+8) Grab pass
 ------------
 
 Use https://docs.unity3d.com/Manual/SL-GrabPass.html to get the pixel data behind your game object in the scene
 
-9. Blend modes
+9) Blend modes
 --------------
 
 Multiply
