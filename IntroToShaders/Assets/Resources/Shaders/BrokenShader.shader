@@ -1,4 +1,4 @@
-﻿Shader "Custom/Color"
+﻿Shader "Custom/BrokenShader"
 {
 	Properties
 	{
@@ -32,7 +32,7 @@
 
 			fixed4 frag(vertexOutput input) : SV_Target
 			{
-				return _Color;
+				return asdf; // Error
 			}
 			ENDCG
 		}
