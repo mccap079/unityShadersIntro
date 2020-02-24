@@ -2,6 +2,7 @@
 {
 	Properties
 	{
+		// https://docs.unity3d.com/Manual/SL-Properties.html
 		_Color("Color", Color) = (1,1,1,0.5)
 	}
 		SubShader

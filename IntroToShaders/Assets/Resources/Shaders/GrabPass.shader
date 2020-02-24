@@ -1,4 +1,4 @@
-﻿Shader "Custom/GrabPassAlpha"
+﻿Shader "Custom/GrabPass"
 {
 	Properties
 	{

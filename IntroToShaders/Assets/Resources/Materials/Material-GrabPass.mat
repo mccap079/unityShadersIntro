@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Material-GrabPassAlpha
+  m_Name: Material-GrabPass
   m_Shader: {fileID: 4800000, guid: 7228948e1fbd591428a26081be4b502a, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
