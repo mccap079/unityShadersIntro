@@ -117,8 +117,8 @@ https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/UVMapping.png/400px-UV
 The process of setting a vector's magnitude to 1 is called **normalization**.
 
 ```
-float3(255,0,0);	// This 8-bit representation of red is not normalized
-float3(1,0,0); 		// This is red, normalized
+float3( 255, 127, 0 );		// This typical 8-bit rgb value is not normalized
+float3( 1, 0.5, 0 ); 		// This is the same rgb value normalized
 ```
 
 In graphics programming there's a type of vector called a "normal vector" -- this is different from a *normalized* vector. A "normal vector" is a vector that is perpendicular to a surface, which is used to determine the direction that the surface is facing in world space. 
@@ -129,12 +129,10 @@ For example UV space is typically normalized (x, y values range from 0-1)
 
 Make sure the fragment shader returns normalized values.
 
-There may be exceptions, i.e., 
-
 Color values in frag shaders are also normalized:
- - Red = `fixed3(1, 0, 0);`
- - Green = `fixed3(0, 1, 0);`
- - Blue = `fixed3(0, 0, 1);`
+ - Red = 	`fixed3(1, 0, 0);`
+ - Green = 	`fixed3(0, 1, 0);`
+ - Blue = 	`fixed3(0, 0, 1);`
 
 ### Ins and outs: passing data between shaders
 
@@ -147,8 +145,8 @@ You must define the data that the vertex shader will pass to the fragment shader
 ```
 struct vertexOutput
 {
-	float4 vertex : SV_POSITION; // The position of the current pixel in screen space coordinates
-	float4 uv : TEXCOORD0; // The position of the current pixel in texture space coordinates
+	float4 vertex : SV_POSITION; 	// The position of the current pixel in screen space coordinates
+	float4 uv : TEXCOORD0; 			// The position of the current pixel in texture space coordinates
 }
 ```
 
