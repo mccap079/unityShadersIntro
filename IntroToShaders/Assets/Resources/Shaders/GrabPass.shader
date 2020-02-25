@@ -25,28 +25,28 @@
 
 			fixed4 _Color;
 
-			struct v2f
+			struct vertexOutput
 			{
 				float4 grabPos : TEXCOORD0;
 				float4 pos : SV_POSITION;
 			};
 
-			v2f vert(appdata_base v) {
-				v2f o;
+			vertexOutput vert(appdata_base input) {
+				vertexOutput output;
 				// use UnityObjectToClipPos from UnityCG.cginc to calculate
-				// the clip-space of the vertex
-				o.pos = UnityObjectToClipPos(v.vertex);
+				// the clip-space (space in the camera's view) of the vertex
+				output.pos = UnityObjectToClipPos(input.vertex);
 				// use ComputeGrabScreenPos function from UnityCG.cginc
 				// to get the correct texture coordinate
-				o.grabPos = ComputeGrabScreenPos(o.pos);
-				return o;
+				output.grabPos = ComputeGrabScreenPos(output.pos);
+				return output;
 			}
 
 			sampler2D _BackgroundTexture;
 
-			fixed4 frag(v2f i) : SV_Target
+			fixed4 frag(vertexOutput input) : SV_Target
 			{
-				fixed4 bgCol = tex2Dproj(_BackgroundTexture, i.grabPos);
+				fixed4 bgCol = tex2Dproj(_BackgroundTexture, input.grabPos);
 
 				fixed4 tint = _Color;
 

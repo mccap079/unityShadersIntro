@@ -1,7 +1,7 @@
 Intro to Shaders in Unity
 =========================
 
-This is technically an intro to *fragment* shaders specifically. No other part of the Unity graphics pipeline is focused on here -- we use minimal vertex shader code mainly as a "pass-through" shader. Frag shaders are arguably the easiest gateway into shader programming due to both its visual nature and its place near the end of the graphics pipeline.
+This is technically an intro to *fragment* shaders specifically. No other part of the Unity graphics pipeline is focused on here -- we use minimal vertex shader code mainly as a "pass-through" shader. Frag shaders are arguably the easiest gateway into shader programming due to both their visual nature and their place near the end of the graphics pipeline.
 
 1 What is a shader?
 -------------------
@@ -76,7 +76,7 @@ Compilation directives: `#pragma vertex vert` & `#pragma fragment frag` ([src](h
 
 Built-in functions & variables: `#include "UnityCG.cginc"` ([src](https://docs.unity3d.com/Manual/SL-BuiltinIncludes.html))
 
-#### [Datatypes](https://docs.unity3d.com/Manual/SL-DataTypesAndPrecision.html)
+#### [Basic Datatypes](https://docs.unity3d.com/Manual/SL-DataTypesAndPrecision.html)
 
 Floats: 
  - `float` (high precision), 
@@ -108,11 +108,28 @@ Or a **position**:
 In 3d engines you are dealing with multiple "spaces":
  - X,Y,Z world space
  - X,Y screen space
- - U,V space (the X and Y axes of a 2d texture on the face of a 3d object are not known as "x" and "y", but "u" and "v")
+ - U,V texture coordinate space (the X and Y axes of a 2d texture on the face of a 3d object are not known as "x" and "y", but "u" and "v")
+
+https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/UVMapping.png/400px-UVMapping.png
 
 ### Normalization
 
-UV space is typically normalized (x, y values range from 0-1)
+The process of setting a vector's magnitude to 1 is called **normalization**.
+
+```
+float3(255,0,0);	// This 8-bit representation of red is not normalized
+float3(1,0,0); 		// This is red, normalized
+```
+
+In graphics programming there's a type of vector called a "normal vector" -- this is different from a *normalized* vector. A "normal vector" is a vector that is perpendicular to a surface, which is used to determine the direction that the surface is facing in world space. 
+
+Vectors in shaders are typically normalized. You are dealing with ranges between 0 and 1.
+
+For example UV space is typically normalized (x, y values range from 0-1)
+
+Make sure the fragment shader returns normalized values.
+
+There may be exceptions, i.e., 
 
 Color values in frag shaders are also normalized:
  - Red = `fixed3(1, 0, 0);`
@@ -132,7 +149,6 @@ struct vertexOutput
 {
 	float4 vertex : SV_POSITION; // The position of the current pixel in screen space coordinates
 	float4 uv : TEXCOORD0; // The position of the current pixel in texture space coordinates
-
 }
 ```
 
@@ -162,7 +178,6 @@ In the frag shader we'll take the vert shader's output as input, where we can us
 // `SV_TARGET` = "single value target"; our frag shader will only return a single `fixed4(r,g,b,a)` color value (as opposed to a struct)
 fixed4 frag(vertexOutput input) : SV_Target
 {
-
 	// Get the screen-space pixel position that we outputted from the vertex shader
 	fixed2 pos = fixed2(floor(input.vertex.x), floor(input.vertex.y)); // floor() is a common math function that will round a decimal down (i.e., from 1.5 to 1.0)
 
@@ -186,25 +201,48 @@ Magenta = shader failed to compile
 6 Change object color
 ----------------------
 
+Pass a color parameter in as a Property:
+
+```
+Properties
+{
+	_Color("Color", Color) = (1,1,1,1)
+}
+```
+
+Declare it within the Cg shader code:
+
+```
+CGPROGRAM
+
+// some code...
+
+fixed4 _Color;
+
+// some more code...
+
+ENDCG
+```
+
+Use it in the frag shader:
+
+```
+fixed4 frag(vertexOutput input) : SV_Target
+{
+	return _Color;
+}
+```
+
 7 Transparency
 ---------------
- 
+
+https://docs.unity3d.com/Manual/SL-SubShaderTags.html
+`Tags { "RenderQueue" = "Transparent" } // Transparent stuff must render after evrything else`
+
 https://docs.unity3d.com/Manual/SL-Blend.html
-
-`Tags { "Queue" = "Transparent" }`
-
-`discard;`
+`Blend SrcAlpha OneMinusSrcAlpha // Traditional transparency`
 
 8 Grab pass
 ------------
 
 Use https://docs.unity3d.com/Manual/SL-GrabPass.html to get the pixel data behind your game object in the scene
-
-9 Blend modes
---------------
-
-Multiply
-
-Screen
-
-Overlay

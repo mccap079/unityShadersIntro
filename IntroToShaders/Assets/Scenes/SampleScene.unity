@@ -1202,7 +1202,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 638602855}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.64, y: 1.89, z: -0.016791344}
+  m_LocalPosition: {x: -5.69, y: 1.89, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1593802568}
@@ -1348,7 +1348,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: '~ XY Map (screen space) ~
+  m_Text: '~ XY Map (clip-space) ~
 
     Same thing as above, but it''s the screen''s X, Y position
 
@@ -1736,8 +1736,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "~ UV Map ~\nRed is assigned to X-axis, Green is assigned to Y.\nHelpful
-    for understanding the position of the pixel \nin UV space."
+  m_Text: "~ UV Map (texture coordinates) ~\nRed is assigned to X-axis, Green is assigned
+    to Y.\nHelpful for understanding the position of the pixel \nin UV space."
 --- !u!222 &917766040
 CanvasRenderer:
   m_ObjectHideFlags: 0
